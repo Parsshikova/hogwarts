@@ -1,0 +1,19 @@
+SQL
+/d - список таблиц
+create table факультет(факультет serial primary key, название text);
+insert into факультет(название) values ('Гриффиндор'), ('Слизерин'), ('Когтевран'), ('Пуффендуй')
+select * from факультет;
+create table роль(роль serial primary key, название text);
+insert into роль(название) values('профессор'), ('ученик');
+select * from роль;
+create table герой(герой serial primary key, фамилия text, имя text, с_факультета int references факультет(факультет), выполняет_роль int references роль(роль), username text, password text);
+insert into герой(фамилия, имя, с_факультета, выполняет_роль, username, password) values ('Поттер', 'Гарри', 1, 2, 'potter', '12345'), ('Грейнждер', 'Гермиона', 1, 2, 'germiona', '12345'),
+('Уизли', 'Рон', 1, 2, 'ron', '12345'), ('Снегг', 'Северус', 2, 1, 'snegg', '12345');
+select фамилия, имя, факультет.название from герой, факультет where герой.с_факультета = факультет.факультет and герой.с_факультета=1;
+create table задание(задание serial primary key, название text);
+insert into задание(название) values('Раздувающий раствор'), ('Напиток живой смерти');
+select * from задание;
+create table журнал(выполнил_задание int references задание(задание), оцениваем int references герой(герой), получил_оценку int, primary key(выполнил_задание, оцениваем));
+insert into журнал (выполнил_задание, оцениваем, получил_оценку) values (1, 1, 5), (2, 1, 5), (1, 2, 5), (2,2,5), (1,3,4), (2,3,3);
+select * from журнал;
+select герой.фамилия, задание.название, оценка

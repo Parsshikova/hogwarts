@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Оценки студента</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Оценки студента: <%= student %></h1>
+        <table border="1">
+            <tr>
+                <th>Фамилия</th>
+                <th>Задание</th>
+                <th>Оценка</th>
+            </tr>
+            <% grades.forEach(grade => { %>
+            <tr>
+                <td><%= grade.фамилия %></td>
+                <td><%= grade.название %></td>
+                <td><%= grade.получил_оценку %></td>
+            </tr>
+            <% }); %>
+        </table>
+        <a href="/">Назад</a>
+    </div>
+</body>
+</html>
